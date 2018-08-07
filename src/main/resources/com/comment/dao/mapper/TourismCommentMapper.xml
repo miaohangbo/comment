@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.comment.dao.TourismCommentMapper">
+  <resultMap id="BaseResultMap" type="com.example.comment.bean.Comment">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="record_id" jdbcType="BIGINT" property="recordId" />
+    <result column="from_userid" jdbcType="BIGINT" property="fromUserid" />
+    <result column="to_userid" jdbcType="BIGINT" property="toUserid" />
+    <result column="comment_desc" jdbcType="VARCHAR" property="commentDesc" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="comment_type" jdbcType="INTEGER" property="commentType" />
+    <result column="comment_status" jdbcType="INTEGER" property="commentStatus" />
+    <result column="parent_id" jdbcType="BIGINT" property="parentId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, record_id, from_userid, to_userid, comment_desc, create_time, update_time, comment_type, 
+    comment_status, parent_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from tourism_comment
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from tourism_comment
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.example.comment.bean.Comment">
+    insert into tourism_comment (id, record_id, from_userid, 
+      to_userid, comment_desc, create_time, 
+      update_time, comment_type, comment_status, 
+      parent_id)
+    values (#{id,jdbcType=BIGINT}, #{recordId,jdbcType=BIGINT}, #{fromUserid,jdbcType=BIGINT}, 
+      #{toUserid,jdbcType=BIGINT}, #{commentDesc,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{commentType,jdbcType=INTEGER}, #{commentStatus,jdbcType=INTEGER}, 
+      #{parentId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.comment.bean.Comment">
+    insert into tourism_comment
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="recordId != null">
+        record_id,
+      </if>
+      <if test="fromUserid != null">
+        from_userid,
+      </if>
+      <if test="toUserid != null">
+        to_userid,
+      </if>
+      <if test="commentDesc != null">
+        comment_desc,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="commentType != null">
+        comment_type,
+      </if>
+      <if test="commentStatus != null">
+        comment_status,
+      </if>
+      <if test="parentId != null">
+        parent_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="recordId != null">
+        #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="fromUserid != null">
+        #{fromUserid,jdbcType=BIGINT},
+      </if>
+      <if test="toUserid != null">
+        #{toUserid,jdbcType=BIGINT},
+      </if>
+      <if test="commentDesc != null">
+        #{commentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentType != null">
+        #{commentType,jdbcType=INTEGER},
+      </if>
+      <if test="commentStatus != null">
+        #{commentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        #{parentId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.comment.bean.Comment">
+    update tourism_comment
+    <set>
+      <if test="recordId != null">
+        record_id = #{recordId,jdbcType=BIGINT},
+      </if>
+      <if test="fromUserid != null">
+        from_userid = #{fromUserid,jdbcType=BIGINT},
+      </if>
+      <if test="toUserid != null">
+        to_userid = #{toUserid,jdbcType=BIGINT},
+      </if>
+      <if test="commentDesc != null">
+        comment_desc = #{commentDesc,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="commentType != null">
+        comment_type = #{commentType,jdbcType=INTEGER},
+      </if>
+      <if test="commentStatus != null">
+        comment_status = #{commentStatus,jdbcType=INTEGER},
+      </if>
+      <if test="parentId != null">
+        parent_id = #{parentId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.comment.bean.Comment">
+    update tourism_comment
+    set record_id = #{recordId,jdbcType=BIGINT},
+      from_userid = #{fromUserid,jdbcType=BIGINT},
+      to_userid = #{toUserid,jdbcType=BIGINT},
+      comment_desc = #{commentDesc,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      comment_type = #{commentType,jdbcType=INTEGER},
+      comment_status = #{commentStatus,jdbcType=INTEGER},
+      parent_id = #{parentId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="getListByTourismId" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from tourism_comment
+    where record_id = #{recordId}
+    and comment_status !=-1
+    and parent_id  = -1
+    <if test="commentType != null" >
+      and comment_type = #{commentType}
+    </if>
+    ORDER BY id DESC
+    limit ${startRow},${pageSize}
+  </select>
+
+
+  <select id="getListCountByTourismId" resultType="java.lang.Long" parameterType="map" >
+    select count(*)
+    from tourism_comment
+    where record_id = #{recordId}
+    and comment_status !=-1
+    and parent_id  = -1
+    <if test="commentType != null" >
+      and comment_type = #{commentType}
+    </if>
+  </select>
+
+  <select id="getListByParentId" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from tourism_comment
+    where record_id = #{recordId}
+    and comment_status !=-1
+    and parent_id  != -1
+    <if test="commentType != null" >
+      and comment_type = #{commentType}
+    </if>
+    ORDER BY id DESC
+  </select>
+  <select id="getListByParentIdAll" resultMap="BaseResultMap" parameterType="map" >
+    select
+    <include refid="Base_Column_List" />
+    from tourism_comment
+    where parent_id = #{parentId}
+    and comment_status !=-1
+    ORDER BY id DESC
+  </select>
+</mapper>
